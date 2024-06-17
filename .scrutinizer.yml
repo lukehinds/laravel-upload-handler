@@ -1,0 +1,24 @@
+filter:
+  paths:
+    - 'src/'
+  excluded_paths:
+    - 'tests/'
+  dependency_paths:
+    - 'vendor/'
+
+checks:
+  php: true
+
+build:
+  nodes:
+    coverage:
+      environment:
+        php:
+          ini:
+            "xdebug.mode": coverage
+      tests:
+        override:
+          - command: ./vendor/bin/phpunit --coverage-clover=build/coverage.clover
+            coverage:
+              file: build/coverage.clover
+              format: clover
